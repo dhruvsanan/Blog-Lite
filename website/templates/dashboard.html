@@ -1,0 +1,80 @@
+{% extends "base.html" %} {% block title %}{{username}}'s Dashboard{% endblock %} {% block content
+  %}
+    <div class="container p-3 my-3" >
+      <div class="row">
+        <div class="col-md-9 col-sm-12">
+            <br>
+          <h1>Welcome {{username}} to your dashboard!</h1>
+          <br>
+          <p>Here you can view and manage your account information.</p>
+          <br>
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <div class="card bg-light p-3 my-3">
+                <div class="card-header">Account Information</div>
+                <div class="card-body">
+                  <p class="card-text">Name: {{username}}</p>
+                  <p class="card-text">Email: {{email}}</p>
+                  <br />
+                  <label for="image">Profile Picture:</label><br>
+                  {% if not url %}
+                  <p class="card-text">Please Update your Profile Picture</p>
+                  {% else %}
+                  <img src="{{ url }}" class="img-fluid">
+                  {% endif %}
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="card bg-light p-3 my-3">
+                <div class="card-header">Posts Information</div>
+                <div class="card-body">
+                  <div class="card-header"><a href="/posts/{{username}}">View Posts</a></div>
+                  <p class="card-text">Total number of Posts: {{nposts}}</p>
+                  <p class="card-text">Total number of Comments: {{ncomments}}
+                    <p class="card-text">Total number of Views: {{views}}</p>
+                  
+                  <div class="card-header">
+                  <form action="/export" method="post">
+                    <input type="radio" name="format" value="csv" checked> CSV
+                    <input type="radio" name="format" value="pdf"> PDF
+                    <button type="submit">Export</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="card bg-light p-3 my-3">
+                <div class="card-header"><a href="/update-user">Update Profile</a></div>
+                <div class="card-header"><a href="/update-picture">Update Profile Picture</a></div>
+                <div class="card-header"><a href="/update-password">Update Password</a></div>
+                <div class="card-header"><a href="/delete-user"><button type="submit" onclick="return confirm('Are you sure you want to delete your Identity?')">Delete your Id</button></a></div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="card bg-light p-3 my-3">
+                <div class="card-header">Follow Information</div>
+                <div class="card-body">
+                  <p class="card-text">Total number of Followers: {{nfollows}}</p>
+                  <p class="card-text">Total number of Following: {{nfollowed}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="card bg-light p-3 my-3">
+                <div class="card-header"><a href="/followers/{{username}}">followers</a></div>
+                <div class="card-header"><a href="/following/{{username}}">following</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div align="center">
+        <a href="/home"
+          ><button type="button" class="btn btn-primary btn-lg">Back</button></a
+        >
+      </div>
+    </div>
+  {% endblock %}

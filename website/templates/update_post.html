@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+  <form method="POST" enctype="multipart/form-data">
+    <h1 align="center">Update your Post</h1>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        class="form-control"
+        value="{{ title }}"
+      />
+      <br>
+      <label for="text">Caption/Description</label>
+      <textarea
+          type="text"
+          id="text"
+          name="text"
+          class="form-control"
+      >{{ text }}</textarea>
+      <br />
+      <label for="image">Image:</label><br>
+      <input type="file" id="image" name="image"><br>
+      {% if post.url %}
+      <img src="{{ post.url }}" class="img-fluid">
+      {% endif %}
+      <br />
+      <div align="center">
+        <button type="submit" class="btn btn-lg btn-primary">Update</button>
+      </div>
+    </form>
+    <br />
+    <div align="center">
+      <a href="/posts/{{user.username}}"
+        ><button type="button" class="btn btn-lg btn-secondary">Back</button></a
+      >
+    </div>
+    {% endblock %}

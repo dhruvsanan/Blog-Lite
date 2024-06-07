@@ -1,0 +1,24 @@
+{% extends "home_posts.html" %} {% block title %}{{username}}'s Posts{% endblock
+    %} {% block header %} 
+    {{username}}'s posts 
+    {% if users.id!=current_user.id %}
+      {% if following and followings %}
+      <form method="POST" action="/follow/{{ username }}">
+        <button type="submit" class="btn btn-danger">Unfollow</button>
+      </form>
+      {% else %}
+      <form method="POST" action="/follow/{{ username }}">
+        <button type="submit" class="btn btn-primary">Follow</button>
+      </form>
+      {% endif %}
+    {% endif %}
+    <form action="/dashboard/{{ username }}">
+      <button type="submit" class="btn btn-primary">{{username}}'s Dashboard</button>
+    </form>
+    {% endblock %} {% block footer %}
+    <div align="center">
+      <a href="/home"
+        ><button type="button" class="btn btn-primary btn-lg">Back</button></a
+      >
+    </div>
+    {% endblock %}

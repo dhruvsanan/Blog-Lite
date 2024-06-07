@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+    
+<h1>{{username}} is following:</h1>
+{% for usern in usernames %}
+<div class="mt-4 container-fluid border">
+    <a href="/posts/{{usern}}"><h2 class="text-dark">{{usern}}</h2></a>
+</div>
+{% endfor %}
+{% if not usernames %}
+        <h2 class="text-dark">{{username}} does not follow anyone</h2>
+{% endif %}
+<div align="center">
+  <a href="/dashboard/{{username}}"
+    ><button type="button" class="btn btn-primary btn-lg">Back</button></a
+  >
+</div>
+{% endblock %}

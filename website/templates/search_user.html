@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+    
+<h1>Searched Users</h1>
+{% for user in users %}
+<div class="mt-4 container-fluid border">
+    <a href="/dashboard/{{user.username}}"><h2 class="text-dark">{{ user.username }}</h2></a>
+    {% set following= Follow.query.filter_by(user_id=current_user.id).first() %}
+    {% set followings= Follow.query.filter_by(followed_user_id=user.id).first() %}
+    {% if following and followings %}
+    <form method="POST" action="/follow/{{ user.username }}">
+      <button type="submit" class="btn btn-danger">Unfollow</button>
+    </form>
+    {% else %}
+    <form method="POST" action="/follow/{{ user.username }}">
+      <button type="submit" class="btn btn-primary">Follow</button>
+    </form>
+    {% endif %}
+</div>
+{% endfor %}
+{% if not users %}
+        <h2 class="text-dark">No user found</h2>
+        <div align="center">
+            <a href="/home"
+              ><button type="button" class="btn btn-primary btn-lg">Back</button></a
+            >
+          </div>
+{% endif %}
+{% endblock %}

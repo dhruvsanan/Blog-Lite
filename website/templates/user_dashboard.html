@@ -1,0 +1,64 @@
+{% extends "base.html" %} {% block title %}{{username}}'s Dashboard{% endblock %} {% block content
+  %}
+      <div class="container p-3 my-3" >
+        <div class="row">
+          <div class="col-md-9 col-sm-12">
+              <br>
+            <h1>Welcome to {{username}}'s dashboard!</h1>
+            <br>
+            <p>Here you can see about {{username}}.</p>
+            <br>
+            <div class="row">
+              <div class="col-md-4 col-sm-6">
+                <div class="card bg-light p-3 my-3">
+                  <div class="card-header">Follow Information</div>
+                  <div class="card-body">
+                    <p class="card-text">Total number of Followers: {{nfollows}}</p>
+                    <p class="card-text">Total number of Following: {{nfollowed}}</p>
+                      {% if following and followings %}
+                      <form method="POST" action="/follow/{{ username }}">
+                        <button type="submit" class="btn btn-danger">Unfollow</button>
+                      </form>
+                      {% else %}
+                      <form method="POST" action="/follow/{{ username }}">
+                        <button type="submit" class="btn btn-primary">Follow</button>
+                      </form>
+                      {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <div class="card bg-light p-3 my-3">
+                  <br />
+                    <label for="image">Profile Picture:</label><br>
+                    {% if not url %}
+                    <p class="card-text">{{username}} has no Profile Picture</p>
+                    {% else %}
+                    <img src="{{ url }}" class="img-fluid">
+                    {% endif %}
+                  <br />
+                  <div class="card-header"><a href="/followers/{{username}}">followers</a></div>
+                  <div class="card-header"><a href="/following/{{username}}">following</a></div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                  <div class="card bg-light p-3 my-3">
+                    <div class="card-header">Posts Information</div>
+                    <div class="card-body">
+                      <p class="card-text">Total number of Posts: {{nposts}}</p>
+                      <p class="card-text">Total number of Comments: {{ncomments}}</p>
+                      <p class="card-text">Total number of Views: {{views}}</p>
+                      <div class="card-header"><a href="/posts/{{username}}">View Posts</a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div align="center">
+          <a href="/home"
+            ><button type="button" class="btn btn-primary btn-lg">Back</button></a
+          >
+        </div>
+  {% endblock %}
